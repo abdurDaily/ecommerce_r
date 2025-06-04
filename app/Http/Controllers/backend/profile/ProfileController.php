@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\backend\profile;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     //PROFILE INDEX
     public function index(){
-        return view('backend.profileSetting.profile');
+        $userData = Auth::user();
+        // dd($userData);
+        return view('backend.profileSetting.profile', compact('userData'));
     }
 }
