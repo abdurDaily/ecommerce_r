@@ -28,14 +28,6 @@ Route::get('/logout', function () {
 
 
 
-Route::get('/test-mail', function () {
-    Mail::raw('This is a test email sent using Brevo SMTP and Laravel 12.', function ($message) {
-        $message->to('abdurdiary@gmail.com') // Replace with your actual email
-                ->subject('🎉 Brevo SMTP Test Successful');
-    });
-
-    return 'Test email has been sent!';
-});
 
 //**PROFILE SETTING */
 Route::middleware(['auth','user-status'])->get('/profile-setting', [ProfileProfileController::class, 'index'])->name('profile.setting');

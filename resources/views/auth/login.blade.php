@@ -189,6 +189,7 @@
               </form>
 
               <p class="text-center">
+                <a href="{{ route('password.request') }}">forget password? </a>
                 <span>New on our platform?</span>
                 <a href="auth-register-basic.html">
                   <span>Create an account</span>
