@@ -1,10 +1,10 @@
 <?php
-
 use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckUserStatus;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +26,16 @@ Route::get('/logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
+
+
+Route::get('/test-mail', function () {
+    Mail::raw('This is a test email sent using Brevo SMTP and Laravel 12.', function ($message) {
+        $message->to('abdurdiary@gmail.com') // Replace with your actual email
+                ->subject('🎉 Brevo SMTP Test Successful');
+    });
+
+    return 'Test email has been sent!';
+});
 
 //**PROFILE SETTING */
 Route::middleware(['auth','user-status'])->get('/profile-setting', [ProfileProfileController::class, 'index'])->name('profile.setting');

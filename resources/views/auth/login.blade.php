@@ -136,9 +136,13 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
+              <h4 class="mb-2 text-center">
+                @if ($errors->has('status'))
+                    <div class="alert alert-danger">
+                      {{ $errors->first('status') }}
+                    </div>
+                @endif
+              </h4>
               <form id="formAuthentication" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-3">
