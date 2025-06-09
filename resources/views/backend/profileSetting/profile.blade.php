@@ -63,7 +63,7 @@
 
 
                   <div class="mt-2">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                    <button type="submit" class="btn btn-primary me-2 userInfo">Save changes</button>
                   </div>
 
 
@@ -82,22 +82,49 @@
 
 
       </div>
+
+
+
       <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
 
 
         <div class="card-body bg-light shadow-sm">
           <div class="d-flex align-items-start align-items-sm-center gap-4">
-            <img src="../assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100" width="100"
-              id="uploadedAvatar">
-            <div class="button-wrapper">
-              <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                <span class="d-none d-sm-block">Upload new photo</span>
-                <i class="bx bx-upload d-block d-sm-none"></i>
-                <input type="file" id="upload" class="account-file-input" hidden="" accept="image/png, image/jpeg">
-              </label>
+            <img class="preview_img"
+              src="{{ Auth::user()->profile_image ?  Auth::user()->profile_image : '../assets/img/avatars/1.png'}}"
+              alt="user-avatar" class="d-block rounded" width="100" id="uploadedAvatar">
 
-              <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-            </div>
+
+
+            <form id="profileForm" enctype="multipart/form-data">
+              @csrf
+              <div class="button-wrapper">
+                <div class="row">
+                  <div class="col-8">
+                    <label for="upload" class="btn btn-outline-primary me-2 mb-4" tabindex="0">
+                      <span class="d-none d-sm-block upload_btn">Upload new photo</span>
+                      <i class="bx bx-upload d-block d-sm-none"></i>
+                      <input name="profile_img" type="file" id="upload" class="account-file-input" hidden
+                        accept=".png,.jpg,.webp,.jpeg">
+                    </label>
+                    <span class="text-danger" id="uploadError"></span>
+                  </div>
+
+                  <div class="col-4">
+                    <button class="btn btn-outline-primary" type="button" id="uploadBtn">Upload</button>
+                  </div>
+                </div>
+
+                <p class="text-muted mb-0">Allowed JPG, GIF, PNG. Max size of 800KB</p>
+
+                <!-- Preview Image -->
+                {{-- <img src="" class="preview_img mt-3" width="120" style="display:none;" /> --}}
+              </div>
+            </form>
+
+
+
+
           </div>
         </div>
 
@@ -108,50 +135,93 @@
       <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
 
 
-        <div class="card-body bg-light shadow-sm">
-          <div class="d-flex align-items-start align-items-sm-center gap-4">
+        <div class="tab-content px-0" id="pills-tabContent">
+          <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
 
-            <form action="" class="w-100" method="post">
-              @csrf
 
-              <div class="row ">
-                <div class="col-xl-6">
 
-                  <label for="old_password">old password</label>
-                  <input class="form-control py-3 mt-2" placeholder="enter your old password" type="pass"
-                    name="old_password" id="old_password">
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="card mb-4">
+                  <h5 class="card-header">Password update</h5>
+                  <!-- Account -->
+
+                  <hr class="my-0">
+                  <div class="card-body ">
+
+                    <form action="{{ route('pass.update') }}" method="post">
+                      @csrf
+                      <label for="old_password">Old Password</label>
+                      <input placeholder="current password" type="password" name="old_password"
+                        class="form-control mb-3 ">
+
+                      <label for="new_password">New Password</label>
+                      <input placeholder="old password" type="password" name="new_password" class="form-control mb-3 ">
+
+                      <label for="new_password_confirmation">Confirm Password</label>
+                      <input placeholder="confirm password" type="password" name="new_password_confirmation"
+                        class=" mb-3 form-control">
+
+                      <button type="submit" class="btn btn-primary mt-3">Update</button>
+                    </form>
+
+
+                  </div>
+                  <!-- /Account -->
                 </div>
+              </div>
+            </div>
 
 
-                
-                <div class="col-xl-6">
 
-                  <label for="new_password">new password</label>
-                  <input class="form-control py-3 mt-2" placeholder="enter your old password" type="pass"
-                    name="new_password" id="new_password">
+
+
+
+          </div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+            tabindex="0">
+
+
+            <div class="card-body bg-light shadow-sm">
+              <div class="d-flex align-items-start align-items-sm-center gap-4">
+                <img src="../assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100"
+                  width="100" id="uploadedAvatar">
+                <div class="button-wrapper">
+                  <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                    <span class="d-none d-sm-block">Upload new photo</span>
+                    <i class="bx bx-upload d-block d-sm-none"></i>
+                    <input type="file" id="upload" class="account-file-input" hidden="" accept="image/png, image/jpeg">
+                  </label>
+
+                  <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                 </div>
-                
-                <div class="col-xl-6 mt-3">
+              </div>
+            </div>
 
-                  <label for="confirm_password">confirm password</label>
-                  <input class="form-control py-3 mt-2" placeholder="enter your old password" type="pass"
-                    name="confirm_password" id="confirm_password">
-                </div>
 
-                <div class="col-xl-6 d-flex align-items-end">
+          </div>
 
-                  <button class="btn btn-primary w-25 py-3">update</button>
-                </div>
+
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+            tabindex="0">
+
+
+            <div class="card-body bg-light shadow-sm">
+              <div class="d-flex align-items-start align-items-sm-center gap-4">
 
 
 
               </div>
-
-
-
-            </form>
-
+            </div>
           </div>
+
+
         </div>
       </div>
 
@@ -165,3 +235,83 @@
 <div class="content-backdrop fade"></div>
 </div>
 @endsection
+
+@push('backend_js')
+
+<script>
+  $(document).ready(function () {
+  // Image preview
+  $('#upload').on('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        $('.preview_img').attr('src', e.target.result).show();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // AJAX Upload
+  $('#uploadBtn').on('click', function (e) {
+    e.preventDefault();
+
+    let formData = new FormData($('#profileForm')[0]);
+
+    $.ajax({
+      url: "{{ route('profile.store') }}",
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+       headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+          ,
+      success: function (response) {
+        
+        $('.preview_img').attr('src', response.url).show(); // Set new image URL
+        location.reload();
+      },
+      error: function (xhr) {
+        let error = xhr.responseJSON?.errors?.profile_img?.[0] || "Upload failed!";
+        $('#uploadError').text(error);
+      }
+    });
+  });
+
+
+
+  // USER INFORMATION UPDATE 
+  $('.userInfo').on('click', function(e){
+    e.preventDefault();
+
+    let userInfoForm = new FormData($('#formAccountSettings')[0]);
+
+    $.ajax({
+      url: `{{ route('profile.info') }}`,
+      method: 'POST',
+      data: userInfoForm,
+      processData:false,
+      contentType:false,
+       headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      success: function(response){
+      alert('user info updated!');
+      console.log(response);
+      setTimeout(function() {
+        location.reload();
+      }, 100);  // reload after 100 milliseconds
+}
+,
+      error: function(xhr){
+        console.log(xhr);
+      }
+    })
+  })
+});
+
+
+
+</script>
+
+
+@endpush

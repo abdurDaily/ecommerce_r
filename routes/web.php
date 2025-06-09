@@ -31,5 +31,9 @@ Route::get('/logout', function () {
 
 //**PROFILE SETTING */
 Route::middleware(['auth','user-status'])->get('/profile-setting', [ProfileProfileController::class, 'index'])->name('profile.setting');
+Route::middleware(['auth', 'user-status'])->post('/pass-update', [ProfileProfileController::class, 'updatePassword'])->name('pass.update');
+Route::middleware(['auth', 'user-status'])->post('/profile-image', [ProfileProfileController::class, 'profileImageUpload'])->name('profile.store');
+Route::middleware(['auth', 'user-status'])->post('/profile-info', [ProfileProfileController::class, 'profileInfo'])->name('profile.info');
+
 
 require __DIR__.'/auth.php';
