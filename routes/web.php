@@ -1,10 +1,13 @@
 <?php
+use App\Http\Controllers\backend\finance\FinanceController;
+
 use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckUserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,4 +39,10 @@ Route::middleware(['auth', 'user-status'])->post('/profile-image', [ProfileProfi
 Route::middleware(['auth', 'user-status'])->post('/profile-info', [ProfileProfileController::class, 'profileInfo'])->name('profile.info');
 
 
+
+//**FINANCE ROUTE'S */
+Route::middleware(['auth', 'user-status'])->prefix('finance/')->name('finance.')->group(function () {
+    Route::get('index', [FinanceController::class, 'financeIndex'])->name('index');
+    Route::post('index', [FinanceController::class, 'financeStore'])->name('store');
+});
 require __DIR__.'/auth.php';
