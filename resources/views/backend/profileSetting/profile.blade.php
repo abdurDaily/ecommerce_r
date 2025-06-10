@@ -1,4 +1,9 @@
 @extends('backendLayout')
+@push('backend_css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+  integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
 @section('backend_contains')
 <div class="content-wrapper">
   <!-- Content -->
@@ -237,7 +242,9 @@
 @endsection
 
 @push('backend_js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+  integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   $(document).ready(function () {
   // Image preview
@@ -295,13 +302,11 @@
       contentType:false,
        headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       success: function(response){
-      alert('user info updated!');
-      console.log(response);
-      setTimeout(function() {
-        location.reload();
-      }, 100);  // reload after 100 milliseconds
-}
-,
+       toastr.success('Have fun storming the castle!', 'Miracle Max Says');
+        setTimeout(() => {
+          location.reload();
+        }, 1500);
+      },
       error: function(xhr){
         console.log(xhr);
       }

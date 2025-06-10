@@ -60,6 +60,8 @@
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
+    @stack('backend_css')
+
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
@@ -510,11 +512,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{{ Auth::user()->profile_image ? Auth::user()->profile_image : '../assets/img/avatars/1.png' }}" alt class="w-px-40 h-auto rounded-circle" />
+                              <img style="width: 40px !important; height:40px !important; object-fit:contain;" src="{{ Auth::user()->profile_image ? Auth::user()->profile_image : '../assets/img/avatars/1.png' }}"  alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block"> {{ Str::limit(Auth::user()->name, 10, '...') }} </span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
