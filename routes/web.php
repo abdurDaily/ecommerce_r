@@ -44,5 +44,7 @@ Route::middleware(['auth', 'user-status'])->post('/profile-info', [ProfileProfil
 Route::middleware(['auth', 'user-status'])->prefix('finance/')->name('finance.')->group(function () {
     Route::get('index', [FinanceController::class, 'financeIndex'])->name('index');
     Route::post('index', [FinanceController::class, 'financeStore'])->name('store');
+    Route::get('all-finance-record', [FinanceController::class, 'getFinanceRecord'])->name('get.finance');
+    Route::get('delete/{id}', [FinanceController::class, 'deleteFinanceItem'])->name('delete.finance');
 });
 require __DIR__.'/auth.php';

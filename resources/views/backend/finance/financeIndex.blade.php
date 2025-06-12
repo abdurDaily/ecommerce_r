@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-header bg-light shadow mb-4 d-flex align-items-center justify-content-between">
             <h4 class="mb-0">Add your personal cost</h4>
-            <a href="#" class="btn btn-primary">all record's</a>
+            <a href="{{ route('finance.get.finance') }}" class="btn btn-primary">all record's</a>
         </div>
         <div class="card-body">
             <form class="p-3 " id="form_data"  method="post" enctype="multipart/form-data">
@@ -68,8 +68,7 @@
             method: `POST`,
             processData:false,
             contentType:false,
-            headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             data: formData,
             success: function(res){
                 console.log(res); 

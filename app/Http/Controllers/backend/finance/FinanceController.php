@@ -24,26 +24,46 @@ class FinanceController extends Controller
         $request->validate([
             'cost_title' => 'required',
             'cost_amount' => 'required',
-
         ]);
 
-        if ($request->hasFile('attach_file')) {
-            $file = $request->file('attach_file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('finance', $fileName, 'public');
-        }
         // dd($request->all());
         $financeData = new Finance();
         $financeData->title = $request->cost_title;
         $financeData->description = $request->cost_details;
         $financeData->author_name = Auth::user()->name;
+        if ($request->hasFile('attach_file')) {
+            $file = $request->file('attach_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('finance', $fileName, 'public');
+            $financeData->attach_file = env('APP_URL') . '/storage/' . $filePath;
+        } else {
+            $financeData->attach_file = null;  // explicitly set as null if no file uploaded
+        }
         $financeData->amount = $request->cost_amount;
-        $financeData->attach_file = env('APP_URL') . '/storage/' . $filePath;
         $financeData->save();
+        return response()->json([
+            'success' => 'finance data inserted!'
+        ], 200);
+    }
+
+
+    //**GET FINANCE RECORD  */
+    public function getFinanceRecord()
+    {
+        $allFinanceRecords = Finance::latest()->simplePaginate(10);
+        // dd($allFinanceRecords);
+        return view('backend.finance.allRecords', compact('allFinanceRecords'));
+    }
+
+
+    //**DELETE DATA  */
+    public function deleteFinanceItem($id)
+    {
+        // return(Finance::find($id));
+        Finance::find($id)->delete();
 
         return response()->json([
-            'success' => 'finance data inserted!',
-            'test' => $filePath
+            'success' => 'Finance item deleted successfully.'
         ], 200);
     }
 }
