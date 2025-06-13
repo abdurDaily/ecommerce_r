@@ -81,12 +81,14 @@
                                         @endif
                                     @endif
 
-                                    <a href="#" class="text-danger deleteFinanceItem"
+                                  @can('delete post')
+                                        <a href="#" class="text-danger deleteFinanceItem"
                                         data-url="{{ route('finance.delete.finance', $finance->id) }}">
                                         <iconify-icon icon="material-symbols:delete-outline-rounded" width="24"
                                             height="24">
                                         </iconify-icon>
                                     </a>
+                                  @endcan
                                 </div>
                             </td>
                         </tr>
