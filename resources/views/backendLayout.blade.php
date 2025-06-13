@@ -149,7 +149,7 @@
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item  {{ Route::is('finance.index') || Route::is('finance.get.finance') ? 'active' : '' }}">
+            <li class="menu-item  {{ Route::is('finance.index') || Route::is('finance.get.finance') || Route::is('finance.edit.finance') ? 'active' : '' }}">
               <a href="{{ route('finance.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Boxicons">Finance</div>

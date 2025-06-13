@@ -46,5 +46,7 @@ Route::middleware(['auth', 'user-status'])->prefix('finance/')->name('finance.')
     Route::post('index', [FinanceController::class, 'financeStore'])->name('store');
     Route::get('all-finance-record', [FinanceController::class, 'getFinanceRecord'])->name('get.finance');
     Route::get('delete/{id}', [FinanceController::class, 'deleteFinanceItem'])->name('delete.finance');
+    Route::get('edit/{id}', [FinanceController::class, 'editFinanceItem'])->name('edit.finance');
+    Route::put('update/{id}', [FinanceController::class, 'updateFinanceItem'])->name('update.finance');
 });
 require __DIR__.'/auth.php';

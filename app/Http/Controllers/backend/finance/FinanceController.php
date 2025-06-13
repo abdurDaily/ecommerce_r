@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\backend\finance;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\Finance;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FinanceController extends Controller
 {
@@ -33,7 +34,10 @@ class FinanceController extends Controller
         $financeData->author_name = Auth::user()->name;
         if ($request->hasFile('attach_file')) {
             $file = $request->file('attach_file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $originalName = $file->getClientOriginalName();
+            $cleanedName = preg_replace('/[^A-Za-z0-9\.\-_]/', '_', $originalName);
+            $fileName = time() . '_' . $cleanedName;
+
             $filePath = $file->storeAs('finance', $fileName, 'public');
             $financeData->attach_file = env('APP_URL') . '/storage/' . $filePath;
         } else {
@@ -64,6 +68,51 @@ class FinanceController extends Controller
 
         return response()->json([
             'success' => 'Finance item deleted successfully.'
+        ], 200);
+    }
+
+
+    //** EDIT FINANCE */
+    public function editFinanceItem($id)
+    {
+        $editFinance = Finance::find($id);
+        return view('backend.finance.editFinance', compact('editFinance'));
+    }
+
+    //**UPDATE FINANCE ITEM */
+    public function updateFinanceItem(Request $request, $id)
+    {
+        $request->validate([
+            'cost_title' => 'required',
+            'cost_amount' => 'required',
+        ]);
+
+        // dd($request->all());
+        $financeData = Finance::find($id);
+        $financeData->title = $request->cost_title;
+        $financeData->description = $request->cost_details;
+        $financeData->author_name = Auth::user()->name;
+        if ($request->hasFile('attach_file')) {
+            // delete old file if exists
+            if ($financeData->attach_file) {
+                $oldPath = str_replace(env('APP_URL') . '/storage/', '', $financeData->attach_file);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            // upload new file
+            $file = $request->file('attach_file');
+            $originalName = $file->getClientOriginalName();
+            $cleanedName = preg_replace('/[^A-Za-z0-9\.\-_]/', '_', $originalName);
+            $fileName = time() . '_' . $cleanedName;
+
+            $filePath = $file->storeAs('finance', $fileName, 'public');
+            $financeData->attach_file = env('APP_URL') . '/storage/' . $filePath;
+        }
+
+        $financeData->amount = $request->cost_amount;
+        $financeData->save();
+        return response()->json([
+            'success' => 'finance data updated!'
         ], 200);
     }
 }

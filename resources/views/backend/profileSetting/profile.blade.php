@@ -6,11 +6,6 @@
 @endpush
 @section('backend_contains')
 <div class="content-wrapper">
-  <!-- Content -->
-
-
-
-  <!-- / Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y ">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
