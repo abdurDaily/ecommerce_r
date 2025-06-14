@@ -155,7 +155,12 @@
                 <div data-i18n="Boxicons">Finance</div>
               </a>
             </li>
-
+            <li class="menu-item {{ Route::is('permission.index') ? 'active' : '' }}">
+              <a href="{{ route('permission.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Role and permission</div>
+              </a>
+            </li>
             <!-- Forms -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">

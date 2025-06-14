@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\backend\finance\FinanceController;
-
+use App\Http\Controllers\backend\permission\PermissionController;
 use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckUserStatus;
@@ -49,4 +49,12 @@ Route::middleware(['auth', 'user-status'])->prefix('finance/')->name('finance.')
     Route::get('edit/{id}', [FinanceController::class, 'editFinanceItem'])->name('edit.finance');
     Route::put('update/{id}', [FinanceController::class, 'updateFinanceItem'])->name('update.finance');
 });
+
+
+//**ROLE AND PERMISSION */
+Route::middleware(['auth', 'user-status'])->prefix('permission')->name('permission.')->group(function () {
+    Route::get('/assign-permission', [PermissionController::class, 'index'])->name('index');
+    Route::post('/assign-permission', [PermissionController::class, 'assignPermission'])->name('assign.permission');
+});
+
 require __DIR__.'/auth.php';
