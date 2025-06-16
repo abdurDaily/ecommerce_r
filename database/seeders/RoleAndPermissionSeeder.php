@@ -40,9 +40,9 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         // Assign role to user
-        $user = User::find(2);
-        if ($user) {
-            $user->assignRole('admin');
-        }
+        // $user = User::find(2);
+        // if ($user) {
+        //     $user->assignRole('admin');
+        // }
     }
 }

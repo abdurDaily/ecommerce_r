@@ -17,11 +17,25 @@ class PermissionController extends Controller
 
     public function assignPermission(Request $request)
     {
-        foreach ($request->users as $userId => $perms) {
-            $user = User::find($userId);
-            if ($user) {
-                $user->syncPermissions($perms); // remove old, assign new
+        $hasAnyPermission = false;
+
+        // Check if 'users' exists and is an array
+        if (is_array($request->users)) {
+            foreach ($request->users as $userId => $perms) {
+                $user = User::find($userId);
+                if ($user) {
+                    // Sync permissions (empty array will remove all)
+                    $user->syncPermissions($perms ?? []);
+                }
+
+                if (!empty($perms)) {
+                    $hasAnyPermission = true;
+                }
             }
+        }
+
+        if (!$hasAnyPermission) {
+            return back()->with('error', 'You must assign at least one permission to any user.');
         }
 
         return back()->with('success', 'Permissions updated successfully!');
