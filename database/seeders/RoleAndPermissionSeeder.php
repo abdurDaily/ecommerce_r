@@ -21,6 +21,7 @@ class RoleAndPermissionSeeder extends Seeder
             'edit',
             'delete',
             'view',
+            'super_admin'
         ];
 
         foreach ($permissions as $permission) {
@@ -29,7 +30,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         // Roles and their permissions
         $roles = [
-            'admin' => ['create', 'edit', 'delete', 'view'],
+            'admin' => ['create', 'edit', 'delete', 'view', 'super_admin'],
             'editor' => ['create', 'edit'],
         ];
 

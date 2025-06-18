@@ -51,9 +51,11 @@
 
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ route('finance.edit.finance', $finance->id) }}" class="text-success">
+                                    @can('edit')
+                                        <a href="{{ route('finance.edit.finance', $finance->id) }}" class="text-success">
                                         <iconify-icon icon="mingcute:pen-line" width="24" height="24"></iconify-icon>
                                     </a>
+                                    @endcan
                                     @php
                                         $fileUrl = $finance->attach_file;
                                         $extension = pathinfo($fileUrl, PATHINFO_EXTENSION);

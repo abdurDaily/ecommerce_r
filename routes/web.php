@@ -52,7 +52,7 @@ Route::middleware(['auth', 'user-status'])->prefix('finance/')->name('finance.')
 
 
 //**ROLE AND PERMISSION */
-Route::middleware(['auth', 'user-status'])->prefix('permission')->name('permission.')->group(function () {
+Route::middleware(['auth', 'user-status', 'can:super_admin'])->prefix('permission')->name('permission.')->group(function () {
     Route::get('/assign-permission', [PermissionController::class, 'index'])->name('index');
     Route::post('/assign-permission', [PermissionController::class, 'assignPermission'])->name('assign.permission');
 });

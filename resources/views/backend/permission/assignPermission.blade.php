@@ -5,13 +5,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
             integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            td label {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                margin-right: 15px;
+                margin-bottom: 8px;
+            }
+        </style>
     @endpush
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
             <div class="card-header bg-light shadow mb-4 d-flex align-items-center justify-content-between">
                 <h4 class="mb-0">Create Role</h4>
-                <a href="" class="btn btn-primary">permission's</a>
+                <a href="" class="btn btn-primary">Permission's</a>
             </div>
             <div class="card-body">
                 <h2>User Permission Management</h2>
@@ -28,26 +37,29 @@
                         <thead>
                             <tr>
                                 <th>User</th>
-                                @foreach ($permissions as $permission)
-                                    <th>{{ $permission->name }}</th>
-                                @endforeach
+                                <th>Permissions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }} <br> <small>{{ $user->email }}</small></td>
-
-                                    {{-- Hidden input ensures user is submitted even with 0 permissions --}}
-                                    <input type="hidden" name="users[{{ $user->id }}]" value="">
-
-                                    @foreach ($permissions as $permission)
-                                        <td class="text-center">
-                                            <input type="checkbox" class="permission-checkbox"
-                                                name="users[{{ $user->id }}][]" value="{{ $permission->name }}"
-                                                {{ $user->hasPermissionTo($permission->name) ? 'checked' : '' }}>
-                                        </td>
-                                    @endforeach
+                                    <td>
+                                        {{ $user->name }} <br>
+                                        <small>{{ $user->email }}</small>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" name="users[{{ $user->id }}]" value="">
+                                        <div class="d-flex flex-wrap">
+                                            @foreach ($permissions as $permission)
+                                                <label>
+                                                    <input type="checkbox" class="permission-checkbox"
+                                                        name="users[{{ $user->id }}][]" value="{{ $permission->name }}"
+                                                        {{ $user->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+                                                    {{ $permission->name }}
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
