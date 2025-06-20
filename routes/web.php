@@ -1,12 +1,13 @@
 <?php
-use App\Http\Controllers\backend\finance\FinanceController;
-use App\Http\Controllers\backend\permission\PermissionController;
-use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\CheckUserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckUserStatus;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\backend\finance\FinanceController;
+use App\Http\Controllers\backend\product\ProductController;
+use App\Http\Controllers\backend\permission\PermissionController;
+use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
 
 
 Route::get('/', function () {
@@ -56,5 +57,19 @@ Route::middleware(['auth', 'user-status', 'can:super_admin'])->prefix('permissio
     Route::get('/assign-permission', [PermissionController::class, 'index'])->name('index');
     Route::post('/assign-permission', [PermissionController::class, 'assignPermission'])->name('assign.permission');
 });
+
+
+//**PRODUCT  */
+Route::middleware(['auth', 'user-status'])
+    ->prefix('product')
+    ->name('product.')
+    ->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::get('/product-record', [ProductController::class, 'productRecords'])->name('records');
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy'); // AJAX delete
+    });
 
 require __DIR__.'/auth.php';
