@@ -6,12 +6,15 @@
 
         <input type="text" name="name" class="form-control p-3 my-2" placeholder="Product Name"
             value="{{ $product->name }}" required>
+
         <input type="text" name="slug" class="form-control p-3 my-2" placeholder="Slug" value="{{ $product->slug }}"
             required>
+
         <input type="number" name="price" class="form-control p-3 my-2" placeholder="Price"
             value="{{ $product->price }}" step="0.01" required>
+
         <input type="number" name="discount" class="form-control p-3 my-2" placeholder="Discount (optional)"
-            value="{{ $product->discount }}" step="0.01">
+            value="{{ $product->discount }}" step="0.01" required>
 
         <select name="stock_status" class="form-control p-3 my-2" required>
             <option value="1" {{ $product->stock_status ? 'selected' : '' }}>In Stock</option>
@@ -46,9 +49,9 @@
             @foreach($product->faqs as $i => $faq)
             <div class="faq-group mb-2">
                 <input type="text" name="faqs[{{ $i }}][question]" class="form-control p-3 mb-1"
-                    value="{{ $faq['question'] }}" placeholder="Question">
+                    value="{{ $faq['question'] }}" placeholder="Question" required>
                 <input type="text" name="faqs[{{ $i }}][answer]" class="form-control p-3" value="{{ $faq['answer'] }}"
-                    placeholder="Answer">
+                    placeholder="Answer" required>
             </div>
             @endforeach
             @endif
@@ -73,8 +76,8 @@
     $('#addFaqBtn').click(function () {
         $('#faqSection').append(`
             <div class="faq-group mb-3 position-relative border p-2 rounded bg-light">
-                <input type="text" name="faqs[${faqIndex}][question]" class="form-control p-3 mb-2" placeholder="Question">
-                <input type="text" name="faqs[${faqIndex}][answer]" class="form-control p-3 mb-2" placeholder="Answer">
+                <input type="text" name="faqs[${faqIndex}][question]" class="form-control p-3 mb-2" placeholder="Question" required>
+                <input type="text" name="faqs[${faqIndex}][answer]" class="form-control p-3 mb-2" placeholder="Answer" required>
                 <button type="button" class="btn btn-sm btn-danger remove-faq" style="position:absolute; top:5px; right:5px;">❌</button>
             </div>
         `);

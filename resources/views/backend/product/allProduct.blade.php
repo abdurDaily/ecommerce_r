@@ -15,7 +15,7 @@
 
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
-            <thead class="table-dark">
+            <thead class="table-light">
                 <tr>
                     <th>SL</th>
                     <th>Name</th>

@@ -73,48 +73,47 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $request->validate([
+        // আগে থেকে ইমেজ আছে কি না চেক করবো
+        $hasExistingImages = $request->has('existing_images') && count($request->existing_images) > 0;
+
+        $rules = [
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products,slug,' . $product->id,
             'price' => 'required|numeric|min:0',
-            'discount' => 'nullable|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
             'stock_status' => 'required|boolean',
             'details' => 'required|string',
-            'faqs' => 'nullable|array',
-            'faqs.*.question' => 'required_with:faqs.*.answer|string',
-            'faqs.*.answer' => 'required_with:faqs.*.question|string',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'faqs' => 'required|array',
+            'faqs.*.question' => 'required|string',
+            'faqs.*.answer' => 'required|string',
             'existing_images' => 'nullable|array',
-        ]);
+        ];
 
-        // Keep only selected existing images, delete removed ones from disk
-        $existingImages = $request->existing_images ?? [];
-        $allImages = [];
-
-        if ($product->images && is_array($product->images)) {
-            foreach ($product->images as $img) {
-                if (in_array($img, $existingImages)) {
-                    $allImages[] = $img;
-                } else {
-                    $path = public_path('uploads/products/' . $img);
-                    if (file_exists($path)) {
-                        unlink($path); // delete removed image file
-                    }
-                }
-            }
+        // নতুন ইমেজ অবশ্যই দরকার, যদি আগে থেকে কোন existing image না থাকে
+        if (!$hasExistingImages) {
+            $rules['images'] = 'required|array';
+            $rules['images.*'] = 'image|mimes:jpeg,png,jpg,gif,webp|max:2048';
+        } else {
+            // যদি আগে থেকে ছবি থাকে, new images optional, কিন্তু দিলে চেক করবে valid কি না
+            $rules['images'] = 'nullable|array';
+            $rules['images.*'] = 'image|mimes:jpeg,png,jpg,gif,webp|max:2048';
         }
 
-        // Add newly uploaded images
+        $request->validate($rules);
+
+        // Handle existing images from the form (hidden inputs)
+        $existingImages = $request->existing_images ?? [];
+
+        // Handle new uploaded images
+        $imageNames = $existingImages; // start with existing
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/products'), $filename);
-                $allImages[] = $filename;
+                $imageNames[] = $filename;
             }
         }
 
-        // Update product
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -123,11 +122,13 @@ class ProductController extends Controller
             'stock_status' => $request->stock_status,
             'details' => $request->details,
             'faqs' => $request->faqs,
-            'images' => $allImages,
+            'images' => $imageNames,
         ]);
 
         return response()->json(['message' => 'Product updated successfully']);
     }
+
+
 
 
     // DELETE PRODUCT
