@@ -1,130 +1,132 @@
 @extends('backendLayout')
 @section('backend_contains')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="mb-4">All Products</h4>
+@push('backend_css')
+<style>
+    .card-body nav {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center
+    }
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
+    .card-body nav span {
+        padding: 10px;
+        display: inline-block;
+        margin: 0 10px;
+        color: #000;
+    }
+
+    .swal2-backdrop-show {
+        z-index: 2251 !important;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
+<div class="container-xxl flex-grow-1 container-p-y ">
+    <div class="card">
+        <div class="card-header bg-light shadow mb-4 d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">All finance record</h4>
+            <a href="{{ route('finance.index') }}" class="btn btn-primary">Store new one</a>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover table-striped table-bordered">
                 <tr>
-                    <th>SL</th>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>Stock</th>
-                    <th>Details</th>
-                    <th>Images</th>
-                    <th>FAQs</th>
-                    <th>Actions</th>
+                    <th>Sn</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Amount /-</th>
+                    <th>Date</th>
+                    <th>Action</th>
                 </tr>
-            </thead>
-            <tbody>
-                @forelse ($products as $index => $product)
-                    <tr id="row-{{ $product->id }}">
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->slug }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->discount ?? '-' }}</td>
-                        <td>
-                            @if ($product->stock_status)
-                                <span class="badge bg-success">In Stock</span>
+                @foreach ($allFinanceRecords as $key => $finance)
+                <tr>
+                    <td>{{ $allFinanceRecords->firstItem() + $key }}</td>
+                    <td>{{ $finance->title }}</td>
+                    <td>{{ $finance->author_name }}</td>
+                    <td>{{ $finance->description }}</td>
+                    <td>{{ $finance->amount }} /- </td>
+                    <td>{{ $finance->created_at->format('d M Y') }}</td>
+
+                    <td>
+                        <div class="d-flex justify-content-between">
+                            @can('edit')
+                            <a href="{{ route('finance.edit.finance', $finance->id) }}" class="text-success">
+                                <iconify-icon icon="mingcute:pen-line" width="24" height="24"></iconify-icon>
+                            </a>
+                            @endcan
+                            @php
+                            $fileUrl = $finance->attach_file;
+                            $extension = pathinfo($fileUrl, PATHINFO_EXTENSION);
+                            @endphp
+
+                            @if ($finance->attach_file)
+                            @if (strtolower($extension) === 'pdf')
+                            <a href="{{ $fileUrl }}" class="text-dark" target="_blank" title="View PDF">
+                                <iconify-icon icon="mdi:file-pdf-box" width="24" height="24"></iconify-icon>
+                            </a>
+                            @elseif (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif']))
+                            <a href="{{ $fileUrl }}" class="text-dark" target="_blank" title="View Image">
+                                <img src="{{ $fileUrl }}" alt="file" style="height: 24px; border-radius: 4px;">
+                            </a>
                             @else
-                                <span class="badge bg-danger">Out of Stock</span>
+                            <a href="{{ $fileUrl }}" class="text-dark" target="_blank" title="Download file">
+                                <iconify-icon icon="mingcute:file-line" width="24" height="24"></iconify-icon>
+                            </a>
                             @endif
-                        </td>
-                        <td>{{ Str::limit($product->details, 50) }}</td>
-                        <td>
-                            @if ($product->images && is_array($product->images))
-                                <div class="d-flex flex-wrap" style="gap: 5px;">
-                                    @foreach ($product->images as $img)
-                                        <img src="{{ asset('uploads/products/' . $img) }}" width="60" height="60" style="object-fit: cover; border-radius: 5px;">
-                                    @endforeach
-                                </div>
                             @endif
-                        </td>
-                        <td>
-                            @if ($product->faqs && is_array($product->faqs))
-                                <ul style="padding-left: 16px;">
-                                    @foreach ($product->faqs as $faq)
-                                        <li>
-                                            <strong>Q:</strong> {{ $faq['question'] }}<br>
-                                            <strong>A:</strong> {{ $faq['answer'] }}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <em>No FAQ</em>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary mb-1">Edit</a>
-                            <button class="btn btn-sm btn-danger delete-btn" data-id="{{ $product->id }}">Delete</button>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="10" class="text-center">No products found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+
+                            @can('delete')
+                            <a href="#" class="text-danger deleteFinanceItem"
+                                data-url="{{ route('finance.delete.finance', $finance->id) }}">
+                                <iconify-icon icon="material-symbols:delete-outline-rounded" width="24" height="24">
+                                </iconify-icon>
+                            </a>
+                            @endcan
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+            {{ $allFinanceRecords->links() }}
+        </div>
     </div>
 </div>
 @endsection
-
 @push('backend_js')
-<!-- SweetAlert2 and Toastr CSS/JS -->
+<script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 <script>
-$(document).ready(function () {
-    $(document).on('click', '.delete-btn', function () {
-        let productId = $(this).data('id');
+    $('.deleteFinanceItem').on('click', function(e) {
+            e.preventDefault();
+            let url = $(this).data('url');
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ route('product.destroy', ':id') }}".replace(':id', productId),
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function (response) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        }).then(() => {
-                            // Remove product row from table
-                            $(`#row-${productId}`).fadeOut(500, function () {
-                                $(this).remove();
-                            });
-                        });
-                    },
-                    error: function () {
-                        Swal.fire(
-                            'Error!',
-                            'Something went wrong. Please try again.',
-                            'error'
-                        );
-                    }
-                });
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function(response) {
+                            //toastr.success('Deleted successfully');
+                            window.location.reload();
+                        },
+                        error: function(xhr) {
+                            toastr.error('Something went wrong');
+                        }
+                    });
+                }
+            });
         });
-    });
-});
 </script>
 @endpush
