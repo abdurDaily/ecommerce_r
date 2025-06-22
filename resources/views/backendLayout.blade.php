@@ -143,26 +143,26 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item ">
+            {{-- <li class="menu-item ">
               <a href="index.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
-            </li>
+            </li> --}}
             <li class="menu-item  {{ Route::is('finance.index') || Route::is('finance.get.finance') || Route::is('finance.edit.finance') ? 'active' : '' }}">
               <a href="{{ route('finance.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Boxicons">Finance</div>
               </a>
             </li>
-           @can('super_admin')
+           {{-- @can('super_admin') --}}
               <li class="menu-item {{ Route::is('permission.index') ? 'active' : '' }}">
               <a href="{{ route('permission.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Role and permission</div>
               </a>
             </li>
-           @endcan
+           {{-- @endcan --}}
             <!-- Forms -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
