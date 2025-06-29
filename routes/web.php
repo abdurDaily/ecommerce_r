@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +9,7 @@ use App\Http\Controllers\backend\finance\FinanceController;
 use App\Http\Controllers\backend\product\ProductController;
 use App\Http\Controllers\backend\permission\PermissionController;
 use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
-
+use App\Http\Controllers\frontend\order\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
 Route::get('/logout', function () {
@@ -34,7 +34,7 @@ Route::get('/logout', function () {
 
 
 //**PROFILE SETTING */
-Route::middleware(['auth','user-status'])->get('/profile-setting', [ProfileProfileController::class, 'index'])->name('profile.setting');
+Route::middleware(['auth', 'user-status'])->get('/profile-setting', [ProfileProfileController::class, 'index'])->name('profile.setting');
 Route::middleware(['auth', 'user-status'])->post('/pass-update', [ProfileProfileController::class, 'updatePassword'])->name('pass.update');
 Route::middleware(['auth', 'user-status'])->post('/profile-image', [ProfileProfileController::class, 'profileImageUpload'])->name('profile.store');
 Route::middleware(['auth', 'user-status'])->post('/profile-info', [ProfileProfileController::class, 'profileInfo'])->name('profile.info');
@@ -72,4 +72,13 @@ Route::middleware(['auth', 'user-status'])
         Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy'); // AJAX delete
     });
 
-require __DIR__.'/auth.php';
+
+//**ORDER FOR FRONTEND  */
+Route::middleware(['auth', 'user-status'])
+    ->prefix('frontend/order')
+    ->name('frontend.order.')
+    ->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+    }); 
+
+require __DIR__ . '/auth.php';

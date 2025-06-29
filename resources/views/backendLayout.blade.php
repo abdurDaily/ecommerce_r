@@ -164,7 +164,7 @@
             </li>
            {{-- @endcan --}}
             <!-- Forms -->
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('product.records') || Route::is('product.index') ? 'active' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Layouts">Product</div>
@@ -182,6 +182,28 @@
                 </li>
               </ul>
             </li>
+
+            
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Form Layouts">Order</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="#" class="menu-link">
+                    <div data-i18n="Vertical Form">record's</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="{{ route('product.records') }}" class="menu-link">
+                    <div data-i18n="Horizontal Form">All records</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
           </ul>
         </aside>
         <!-- / Menu -->

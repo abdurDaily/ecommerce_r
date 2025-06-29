@@ -1,0 +1,42 @@
+@media (max-width: 991.98px) {
+
+    #hero .container h1 {
+        font-size: 38px;
+    }
+
+    #hero .container p {
+        font-size: 18px;
+    }
+
+    #hero .purchase {
+        margin-top: 40px;
+    }
+
+
+
+    #characteristics .container{
+        padding: 0 30px ;
+    }
+    #characteristics .row{
+        margin: auto;
+        margin-top: 0 !important;
+    }
+    #characteristics .characteristics_box {
+        width: 100%;
+        margin: 12px 0 !important;        margin: 0;
+    }
+
+
+    #product .row{
+        margin-top: 0 !important;
+    }
+    #product .product_cart{
+        width: 95%;
+        margin: 20px 0;
+    }
+
+
+    #review .right, #review .left {
+        display: none !important;
+    }
+}
