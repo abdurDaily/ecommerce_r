@@ -21,7 +21,7 @@
 
 /* FONT END */
 body {
-    font-family: ador_noirrit_regular;
+    font-family: ador_noirrit_regular !important;
 }
 
 /* hero */
@@ -307,4 +307,8 @@ body {
     background: transparent;
     color: #000;
     outline: 1px solid #000;
+}
+
+#footer {
+    font-family: ador_noirrit_regular !important;;
 }

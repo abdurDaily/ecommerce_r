@@ -79,6 +79,7 @@ Route::middleware(['auth', 'user-status'])
     ->name('frontend.order.')
     ->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::post('/store-order', [OrderController::class, 'store'])->name('store');
     }); 
 
 require __DIR__ . '/auth.php';
