@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Order;
+
 class OrderController extends Controller
 {
     /**INDEX */
@@ -35,18 +36,18 @@ class OrderController extends Controller
     {
 
         $validated = $request->validate([
-    'client_name' => 'required|string|max:255',
-    'client_phone' => 'required|string|max:255',
-    'client_address' => 'required|string',
-    'division_id' => 'required',
-    'district_id' => 'required',
-    'upazilla_id' => 'required',
-    'packages' => 'required|array|min:1',
-    'packages.*.name' => 'required|string',
-    'packages.*.qty' => 'required|integer|min:1',
-    'packages.*.price' => 'required|numeric|min:0',
-    'total_price' => 'required|numeric|min:0',
-]);
+            'client_name' => 'required|string|max:255',
+            'client_phone' => 'required|string|max:255',
+            'client_address' => 'required|string',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'upazilla_id' => 'required',
+            'packages' => 'required|array|min:1',
+            'packages.*.name' => 'required|string',
+            'packages.*.qty' => 'required|integer|min:1',
+            'packages.*.price' => 'required|numeric|min:0',
+            'total_price' => 'required|numeric|min:0',
+        ]);
 
 
         $order = Order::create([

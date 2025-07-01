@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\backend\finance\FinanceController;
+use App\Http\Controllers\backend\order\OrderController as OrderOrderController;
 use App\Http\Controllers\backend\product\ProductController;
 use App\Http\Controllers\backend\permission\PermissionController;
 use App\Http\Controllers\backend\profile\ProfileController as ProfileProfileController;
@@ -73,6 +74,21 @@ Route::middleware(['auth', 'user-status'])
     });
 
 
+
+//**BACKEND ORDER   */
+Route::middleware(['auth', 'user-status'])
+    ->prefix('backend_order')
+    ->name('backend.order.')
+    ->group(function () {
+        Route::get('/', [OrderOrderController::class, 'index'])->name('index');
+
+        // Single toggle route for status
+        Route::post('/toggle-status/{id}', [OrderOrderController::class, 'toggleStatus'])->name('toggle-status');
+    });
+
+
+
+
 //**ORDER FOR FRONTEND  */
 Route::middleware(['auth', 'user-status'])
     ->prefix('frontend/order')
@@ -81,5 +97,6 @@ Route::middleware(['auth', 'user-status'])
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::post('/store-order', [OrderController::class, 'store'])->name('store');
     }); 
+
 
 require __DIR__ . '/auth.php';

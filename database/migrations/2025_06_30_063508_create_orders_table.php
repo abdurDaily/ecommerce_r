@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('upazilla_id')->nullable();
             $table->json('packages');
             $table->decimal('total_price', 10, 2);
+            $table->boolean('action')->default(0);
             $table->timestamps();
         });
     }
