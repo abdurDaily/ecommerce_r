@@ -37,6 +37,299 @@
 
 <body>
 
+    <!-- HERO -->
+    <section id="hero" style="background: url({{ asset('frontend/assets/images/hero.png') }})">
+        <div class="container">
+            <img style="width: 180px" src="https://raafidan.com/images/raafidan.png" alt="" />
+            <h1>
+                প্রিমিয়াম প্রডাক্টের সংকলন <br />
+                আপনার পছন্দে বিশেষ ঘ্রাণ
+            </h1>
+            <p>
+                বিশ্বস্ত সুগন্ধির অভিজ্ঞতা এখন এক সেটেই উপহার কিংবা নিজের ব্যবহারের
+                জন্য উপযুক্ত।
+            </p>
+            <div>
+                <a href="#product" class="purchase">এই প্যাকেজটি কিনুন</a>
+            </div>
+        </div>
+    </section>
+    <!-- HERO END -->
+
+    <!-- characteristics start -->
+    <section id="characteristics">
+        <div class="container">
+            <div class="header">
+                <h4>আমাদের বৈশিষ্ট্য সমুহ</h4>
+                <p>১০০% অ্যালকোহল মুক্ত পারফিউম</p>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-xl-3 characteristics_box">
+                    <div>
+                        <span><iconify-icon icon="mdi:smell" width="129" height="129"></iconify-icon></span>
+                        <h4>দীর্ঘস্থায়ী ঘ্রাণ</h4>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 characteristics_box">
+                    <div>
+                        <span>
+                            <iconify-icon icon="ic:baseline-mosque" width="129" height="129"></iconify-icon></span>
+                        <h4>নামায ও ইসলামী অনুষ্ঠানে উপযোগী</h4>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 characteristics_box">
+                    <div>
+                        <span><iconify-icon icon="mdi:gift" width="129" height="129"></iconify-icon></span>
+                        <h4>উপহার দেওয়ার জন্য দারুণ প্যাকেজিং</h4>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 characteristics_box">
+                    <div>
+                        <span><iconify-icon icon="material-symbols:editor-choice-rounded" width="129"
+                                height="129"></iconify-icon></span>
+                        <h4>আপনার পছন্দমতো আতর নির্বাচন করার সুবিধা</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- characteristics end -->
+
+    <!-- product -->
+    <section id="product">
+        <div class="container">
+            <div class="header">
+                <h4>আমাদের প্যাকেজ সমূহ</h4>
+                <p>
+                    আপনার পছন্দের জন্য বেছে নেওয়া জনপ্রিয় আতরের সংগ্রহ। প্রতিটি ঘ্রাণই
+                    <br />
+                    আলাদা আবেশ ও অনুভূতি নিয়ে আসবে।
+                </p>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-xl-4 product_cart">
+                    <div>
+                        <div class="img">
+                            <img class="img-fluid" src="./assets/images/product_1.png" alt="" />
+                        </div>
+                        <div class="contains">
+                            <h4>এ্যারোমা জেনেসিস ৫ টির প্যাকেজ।</h4>
+                            <p>
+                                জনপ্রিয় বিশ্বাসের বিপরীতে, লোরেম ইপসাম কেবল এলোমেলো লেখা নয়।
+                                এর শিকড় ৪৫ খ্রিস্টপূর্বাব্দের ধ্রুপদী ল্যাটিন সাহিত্যের একটি
+                                অংশে রয়েছে।
+                            </p>
+                            <div class="retting">
+                                <span>রেটিং:</span>
+                                <ul class="p-0">
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="proicons:star" width="18" height="18"></iconify-icon>
+                                    </li>
+                                </ul>
+                                <span>(১৮)</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between pricing align-items-center">
+                                <span>৳ ৩৯০</span>
+                                <a href="#order">এই প্যাকেজটি কিনুন</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 product_cart">
+                    <div>
+                        <div class="img">
+                            <img class="img-fluid" src="./assets/images/product_1.png" alt="" />
+                        </div>
+                        <div class="contains">
+                            <h4>এহেসাস আল আরাবিয়া ১০ টির প্যাকেজ।</h4>
+                            <p>
+                                জনপ্রিয় বিশ্বাসের বিপরীতে, লোরেম ইপসাম কেবল এলোমেলো লেখা নয়।
+                                এর শিকড় ৪৫ খ্রিস্টপূর্বাব্দের ধ্রুপদী ল্যাটিন সাহিত্যের একটি
+                                অংশে রয়েছে।
+                            </p>
+                            <div class="retting">
+                                <span>রেটিং:</span>
+                                <ul class="p-0">
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="material-symbols:star-rounded" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                    <li>
+                                        <iconify-icon icon="proicons:star" width="18"
+                                            height="18"></iconify-icon>
+                                    </li>
+                                </ul>
+                                <span>(১৮)</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between pricing align-items-center">
+                                <span>৳ ৬৯০</span>
+                                <a href="#order">এই প্যাকেজটি কিনুন</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- product end -->
+
+    <!-- review -->
+    <section id="review">
+        <div class="container">
+            <div class="header">
+                <h4>আমাদের ক্রেতারা যা বলেছেন</h4>
+                <p>
+                    আপনার পছন্দের জন্য বেছে নেওয়া জনপ্রিয় আতরের সংগ্রহ। প্রতিটি ঘ্রাণই
+                    <br />
+                    আলাদা আবেশ ও অনুভূতি নিয়ে আসবে।
+                </p>
+            </div>
+            <div class="sliders mt-4">
+                <div class="slider">
+                    <img class="img-fluid" src="./assets/images/review_1.jpg" alt="" />
+                </div>
+                <div class="slider">
+                    <img class="img-fluid" src="./assets/images/review_1.jpg" alt="" />
+                </div>
+                <div class="slider">
+                    <img class="img-fluid" src="./assets/images/review_1.jpg" alt="" />
+                </div>
+                <div class="slider">
+                    <img class="img-fluid" src="./assets/images/review_1.jpg" alt="" />
+                </div>
+                <div class="slider">
+                    <img class="img-fluid" src="./assets/images/review_1.jpg" alt="" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- review end -->
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+
+
+            <div class="header">
+                <h4 class="text-center">আপনাদের কিছু প্রশ্ন এবং উত্তর</h4>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-8">
+                    <div class="accordion shadow-sm" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    প্রশ্ন: আতরগুলোতে কি এলকোহল আছে?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>উত্তর: হ্যাঁ, ১০ টি আতরের সেটে আপনি ১৫ টির মধ্য থেকে নিজের
+                                        পছন্দমতো ১০ টি নির্বাচন করতে পারবেন।</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    প্রশ্ন: আমি কি আমার পছন্দের আতরগুলো বেছে নিতে পারবো?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>উত্তর: হ্যাঁ, ১০ টি আতরের সেটে আপনি ১৫ টির মধ্য থেকে নিজের
+                                        পছন্দমতো ১০ টি নির্বাচন করতে পারবেন।</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    প্রশ্ন: ডেলিভারি কতদিনে হবে?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>উত্তর: হ্যাঁ, ১০ টি আতরের সেটে আপনি ১৫ টির মধ্য থেকে নিজের
+                                        পছন্দমতো ১০ টি নির্বাচন করতে পারবেন।</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour">
+                                    প্রশ্ন: ডেলিভারি কতদিনে হবে?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>উত্তর: হ্যাঁ, ১০ টি আতরের সেটে আপনি ১৫ টির মধ্য থেকে নিজের
+                                        পছন্দমতো ১০ টি নির্বাচন করতে পারবেন।</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                {{-- <div class="col-xl-5">
+                        <img style="height: 340px;" class="img-fluid" src="./assets/images/faq.png" alt="" />
+                    </div> --}}
+            </div>
+        </div>
+    </section>
+    <!-- FAQ END -->
+
+
+
     <section id="order">
         <div class="container">
             <div class="header">
@@ -161,6 +454,80 @@
 
         </div>
     </section>
+
+
+
+    <!-- FOOTER -->
+    <footer id="footer" style="background:#000; color:#eee; padding: 40px 0; font-family: 'Roboto', sans-serif;">
+        <div class="container">
+            <div class="row gy-4 justify-content-between align-items-center">
+
+                <!-- Logo & Description -->
+                <div class="col-md-4 text-center text-md-start">
+                    <img src="https://raafidan.com/images/raafidan.png  " alt="Brand Logo"
+                        style="width: 100px; filter: brightness(0) invert(1);" />
+                    <p style="margin-top: 15px; font-size: 1rem; max-width: 280px;">
+                        প্রিমিয়াম ঘ্রাণ এবং আতরের সংকলন যা আপনার প্রতিদিনের মুহূর্তকে করে তোলে বিশেষ।
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-4 text-center text-md-start">
+                    <h5 style="font-weight: 700; margin-bottom: 15px;">দ্রুত লিঙ্কসমূহ</h5>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><a href="#product"
+                                style="color: #eee; text-decoration: none; transition: color 0.3s;">প্যাকেজ
+                                সমূহ</a></li>
+                        <li><a href="#order"
+                                style="color: #eee; text-decoration: none; transition: color 0.3s;">অর্ডার করুন</a>
+                        </li>
+                        <li><a href="#faq"
+                                style="color: #eee; text-decoration: none; transition: color 0.3s;">প্রশ্ন ও
+                                উত্তর</a></li>
+                        <li><a href="#review"
+                                style="color: #eee; text-decoration: none; transition: color 0.3s;">ক্রেতাদের
+                                মতামত</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Social -->
+                <div class="col-md-3 text-center text-md-start">
+                    <h5 style="font-weight: 700; margin-bottom: 15px;">যোগাযোগ করুন</h5>
+                    <p style="margin: 0 0 10px;">
+                        📞 ফোন:
+                        <a href="tel:+01775333625" style="color: #eee; text-decoration: none;">
+                            ০১৭৭৫-৩৩৩৬২৫
+                        </a>
+                    </p>
+                    <p style="margin: 0 0 10px;">
+                        ✉️ ইমেইল:
+                        <a href="mailto:raafidan@gmail.com" style="color: #eee; text-decoration: none;">
+                            raafidan@gmail.com
+                        </a>
+                    </p>
+                    <div style="margin-top: 10px;">
+                        <a target="_blank" href="https://www.facebook.com/RaafidanStore"
+                            style="color: #eee; margin-right: 15px; font-size: 1.5rem; transition: color 0.3s; text-decoration: none;">
+                            <iconify-icon icon="mdi:facebook" width="24" height="24"></iconify-icon>
+                        </a>
+                        <a target="_blank" href="https://wa.me/8801775333625"
+                            style="color: #eee; font-size: 1.5rem; transition: color 0.3s; text-decoration: none;">
+                            <iconify-icon icon="mdi:whatsapp" width="24" height="24"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr style="border-color: #222; margin: 30px 0;" />
+
+            <div class="text-center" style="font-size: 0.9rem; color: #666;">
+                &copy; ২০২৫ রাফিদান | সর্বস্বত্ব সংরক্ষিত
+            </div>
+        </div>
+    </footer>
+
+    {{-- FOOTER END --}}
 
     <!-- JS Files -->
     <script src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js') }}"></script>
@@ -322,7 +689,8 @@
                             text: response.message,
                             confirmButtonText: 'ঠিক আছে'
                         }).then(() => {
-                            window.location.href = "{{ route('frontend.order.index') }}";
+                            window.location.href =
+                                "{{ route('frontend.order.index') }}";
                         });
                     },
                     error: function(xhr) {
