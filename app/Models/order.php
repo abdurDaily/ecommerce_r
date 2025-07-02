@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class order extends Model
+class Order extends Model
 {
-       protected $fillable = [
+    protected $fillable = [
         'client_name',
         'client_phone',
         'client_address',

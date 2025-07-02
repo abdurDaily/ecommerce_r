@@ -463,10 +463,17 @@
             <div class="row gy-4 justify-content-between align-items-center">
 
                 <!-- Logo & Description -->
-                <div class="col-md-4 text-center text-md-start">
+                <div class="col-md-4 text-center text-md-start"
+                    style="text-align: center !important;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;">
                     <img src="https://raafidan.com/images/raafidan.png  " alt="Brand Logo"
                         style="width: 100px; filter: brightness(0) invert(1);" />
-                    <p style="margin-top: 15px; font-size: 1rem; max-width: 280px;">
+                    <p style="margin-top: 15px; font-size: 1rem; max-width: 280px; ">
                         প্রিমিয়াম ঘ্রাণ এবং আতরের সংকলন যা আপনার প্রতিদিনের মুহূর্তকে করে তোলে বিশেষ।
                     </p>
                 </div>

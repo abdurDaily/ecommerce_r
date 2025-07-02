@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\backend\order;
 
-use App\Models\order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function index()
     {
         // Fetch all orders from DB
-        $orders = order::latest()->get();
+        $orders = Order::latest()->get();
 
         // Load BDAPI data
         $divisions = Http::get('https://bdapi.vercel.app/api/v.1/division')->json('data');

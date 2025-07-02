@@ -6,6 +6,7 @@ use App\Models\Finance;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,28 +55,37 @@ class FinanceController extends Controller
     //**GET FINANCE RECORD  */
     public function getFinanceRecord()
     {
+        $products = product::get();
+        // dd($products);
         $allFinanceRecords = Finance::latest()->simplePaginate(10);
         // dd($allFinanceRecords);
-        return view('backend.finance.allRecords', compact('allFinanceRecords'));
+        return view('backend.finance.allRecords', compact('allFinanceRecords', 'products'));
     }
 
 
     //**DELETE DATA  */
     public function deleteFinanceItem($id)
     {
-        // return(Finance::find($id));
-        Finance::find($id)->delete();
+        $finance = Finance::findOrFail($id);
 
-        return response()->json([
-            'success' => 'Finance item deleted successfully.'
-        ], 200);
+        // Optional: Delete attached file from storage if exists
+        if ($finance->attach_file) {
+            $oldPath = str_replace(env('APP_URL') . '/storage/', '', $finance->attach_file);
+            Storage::disk('public')->delete($oldPath);
+        }
+
+        $finance->delete();
+
+        return response()->json(['success' => 'Finance item deleted successfully.']);
     }
+
 
 
     //** EDIT FINANCE */
     public function editFinanceItem($id)
     {
         $editFinance = Finance::find($id);
+        // dd($editFinance);
         return view('backend.finance.editFinance', compact('editFinance'));
     }
 
